@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Elit</string>
+    <string name="server_error">Error occurred while retrieving from the server</string>
+    <string name="sort_by_popularity">Sort by Popularity</string>
+    <string name="sort_by_rating">Sort by Rating</string>
+    <string name="network_not_available">Network not available</string>
+    <string name="rating">Rating:</string>
+    <string name="release_date">Release Date:</string>
+    <string name="mark_as_favourite">Mark as Favourite</string>
+    <string name="already_marked_as_favourite">Already Marked as Favourite</string>
+    <string name="trailers">Trailers</string>
+    <string name="reviews">Reviews</string>
+    <string name="trailer">Trailer</string>
+</resources>
