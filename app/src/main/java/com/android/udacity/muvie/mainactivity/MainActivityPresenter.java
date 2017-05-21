@@ -1,15 +1,18 @@
 package com.android.udacity.muvie.mainactivity;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
+import com.android.udacity.muvie.data.source.local.MovieContract;
+import com.android.udacity.muvie.data.source.remote.MoviesService;
 import com.android.udacity.muvie.utils.Constants;
 import com.android.udacity.muvie.utils.models.Movies;
 import com.android.udacity.muvie.utils.models.MoviesResults;
-import com.android.udacity.muvie.data.source.remote.MoviesService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,7 +33,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     private Retrofit retrofit;
     private Context context;
     private List<MoviesResults> movieList;
-    
+
     @Inject
     public MainActivityPresenter(Context context, MainActivityContract.View view, Retrofit retrofit) {
         this.context = context;
@@ -74,6 +77,42 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
         return activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
+    }
+
+    @Override
+    public void makeLocalDbCall() {
+
+        Cursor data = context.getContentResolver().query(MovieContract.MovieEntry.CONTENT_URI,
+                null,
+                null,
+                null,
+                MovieContract.MovieEntry._ID);
+
+        int idIndex = data.getColumnIndex(MovieContract.MovieEntry._ID);
+        int movieIdIndex = data.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIE_ID);
+        int movieTitleIndex = data.getColumnIndex(MovieContract.MovieEntry.COLUMN_TITLE);
+        int imageUrlIndex = data.getColumnIndex(MovieContract.MovieEntry.COLUMN_IMAGE_URL);
+        int releaseDateIndex = data.getColumnIndex(MovieContract.MovieEntry.COLUMN_RELEASE_DATE);
+        int synopsisIndex = data.getColumnIndex(MovieContract.MovieEntry.COLUMN_SYNOPSIS);
+        int ratingIndex = data.getColumnIndex(MovieContract.MovieEntry.COLUMN_RATING);
+
+        List<MoviesResults> moviesList = new ArrayList<>();
+        while (data.moveToNext()) {
+            MoviesResults movie = new MoviesResults();
+            movie.setId(data.getInt(movieIdIndex));
+            movie.setOriginal_title(data.getString(movieTitleIndex));
+            movie.setPoster_path(data.getString(imageUrlIndex));
+            movie.setRelease_date(data.getString(releaseDateIndex));
+            movie.setOverview(data.getString(synopsisIndex));
+            movie.setVote_average(Double.parseDouble(data.getString(ratingIndex)));
+            moviesList.add(movie);
+
+        }
+
+
+        onFinished(moviesList);
+
+
     }
 
     public void onFinished(List<MoviesResults> movieList) {

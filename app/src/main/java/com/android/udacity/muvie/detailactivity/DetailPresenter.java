@@ -113,7 +113,10 @@ public class DetailPresenter implements DetailContract.Presenter {
 
         contentValues.put(MovieContract.MovieEntry.COLUMN_MOVIE_ID, moviesResults.getId());
         contentValues.put(MovieContract.MovieEntry.COLUMN_TITLE, moviesResults.getTitle());
-
+        contentValues.put(MovieContract.MovieEntry.COLUMN_IMAGE_URL, moviesResults.getPoster_path());
+        contentValues.put(MovieContract.MovieEntry.COLUMN_RELEASE_DATE, moviesResults.getRelease_date());
+        contentValues.put(MovieContract.MovieEntry.COLUMN_SYNOPSIS, moviesResults.getOverview());
+        contentValues.put(MovieContract.MovieEntry.COLUMN_RATING, moviesResults.getVote_average());
         Uri uri = context.getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, contentValues);
 
     }

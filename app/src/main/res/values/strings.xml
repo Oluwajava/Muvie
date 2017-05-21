@@ -3,6 +3,7 @@
     <string name="server_error">Error occurred while retrieving from the server</string>
     <string name="sort_by_popularity">Sort by Popularity</string>
     <string name="sort_by_rating">Sort by Rating</string>
+    <string name="sort_by_favourite">Sort by Favourite</string>
     <string name="network_not_available">Network not available</string>
     <string name="rating">Rating:</string>
     <string name="release_date">Release Date:</string>

@@ -15,7 +15,7 @@ public interface MainActivityContract {
     interface Presenter extends BasePresenter {
         void makeServerCall(String queryType);
         boolean isNetworkAvailable();
-
+        void makeLocalDbCall();
     }
 
     interface View extends BaseView<Presenter> {

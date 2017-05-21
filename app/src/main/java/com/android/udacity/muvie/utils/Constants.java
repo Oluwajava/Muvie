@@ -14,7 +14,7 @@ public interface Constants {
 
     interface Keys {
         String API_KEY = "api_key";
-        String MY_API_KEY = "MY_API_KEY";
+        String MY_API_KEY = "8b33f5b57c1964517ae7a3229bedbf88";
 
         String RESULTS = "results";
         String POSTER_PATH = "poster_path";

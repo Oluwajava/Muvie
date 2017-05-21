@@ -147,6 +147,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
             case R.id.sort_by_rating:
                 presenter.makeServerCall(Constants.Keys.TOP_RATED);
                 break;
+            case R.id.sort_by_favourite:
+                presenter.makeLocalDbCall();
+                break;
         }
         return true;
     }
